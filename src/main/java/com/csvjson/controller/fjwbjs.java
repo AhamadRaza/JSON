@@ -4,8 +4,6 @@ class fjwbjs {
 
 
     dwjdvhnbjbjbj
-    acasca
-            acadca
-    axa
+
 
 }
