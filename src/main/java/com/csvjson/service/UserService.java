@@ -8,6 +8,5 @@ import java.util.List;
 public interface UserService {
     public List<User> findAll();
     public boolean createJson(List<User> users, ServletContext context);
-
-    //boolean createcsv(List<User> users, ServletContext context);
+    public boolean createcsv(List<User> users, ServletContext context);
 }

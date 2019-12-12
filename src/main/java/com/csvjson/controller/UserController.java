@@ -32,38 +32,39 @@ public class UserController {
         boolean isFLag = userService.createJson(users, context);
         if(isFLag){
             String fullPath = request.getServletContext().getRealPath("/resources/reports/"+"users.json");
-            fileDownload(fullPath, "user.json", response);
+            fileDownload(fullPath, response, "users.json");
         }
     }
-    /*@GetMapping(value = "/createcsv")
+    @GetMapping(value = "/createcsv")
     public void createcsv(HttpServletRequest request, HttpServletResponse response){
         List<User> users = userService.findAll();
         boolean isFLag = userService.createcsv(users, context);
         if(isFLag){
-            String fullPath = request.getServletContext().getRealPath("/resources/reports/"+"user.csv");
-            fileDownload(fullPath, response, "user.csv");
+            String fullPath = request.getServletContext().getRealPath("/resources/reports/"+"users.csv");
+            fileDownload(fullPath, response, "users.csv");
         }
-    }*/
+    }
 
-    private void fileDownload(String fullPath, String filename, HttpServletResponse response) {
+    private void fileDownload(String fullPath, HttpServletResponse response, String filename) {
         File file = new File(fullPath);
         final int BUFFER_SIZE = 4096;
         if (file.exists()) {
             try {
-                FileInputStream fileInputStream = new FileInputStream(file);
+                FileInputStream inputStream = new FileInputStream(file);
                 String mimeType = context.getMimeType(fullPath);
                 response.setContentType(mimeType);
-                response.setHeader("Content-disposition", "attachment; filename" + filename);
+                response.setHeader("Content-disposition", "attachment; filename=" + filename);
                 OutputStream outputStream = response.getOutputStream();
                 byte[] buffer = new byte[BUFFER_SIZE];
                 int byteRead = -1;
-                while ((byteRead = fileInputStream.read(buffer)) != -1) {
+                while ((byteRead = inputStream.read(buffer)) != -1) {
                     outputStream.write(buffer, 0, byteRead);
                 }
-                fileInputStream.close();
+                inputStream.close();
                 outputStream.close();
                 file.delete();
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 e.printStackTrace();
             }
         }
