@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user123")
 public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +23,37 @@ public class User implements Serializable{
     private String email;
     @Column(name = "mobile")
     private String mobile;
+    @Column(name = "file_type")
+    private String fileType;
 
+    @Transient
+    private MultipartFile file;
 
+    public User(){}
+
+    public User(String firstName, String lastName, String email, String mobile, String fileType) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.mobile = mobile;
+        this.fileType = fileType;
+    }
+    public String getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
     public Long getId() {
         return id;
     }
