@@ -20,6 +20,7 @@ import java.util.List;
 
 @Controller
 public class UserController {
+    //user
     @Autowired private UserService userService;
     @Autowired private ServletContext context;
 
